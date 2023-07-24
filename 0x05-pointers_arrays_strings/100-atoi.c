@@ -1,47 +1,31 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "main.h"
+
 /**
- * main - main block
- * Description: Write a program that prints all possible
- * different combinations of two digits
- * Numbers must be separated by ,, followed by a space
- * The two digits must be different
- * 01 and 10 are considered the same combination of the two digits 0 and 1
- * Print only the smallest combination of two digits
- * Numbers should be printed in ascending order, with two digits
- * You can only use the putchar function
- * (every other function (printf, puts, etc…) is forbidden)
- * You can only use putchar five times maximum in your code
- * You are not allowed to use any variable of type char
- * All your code should be in the main function
- * Return: 0
+ * _atoi - convert a string to an integer.
+ * @s: char type string
+ * Return: integer converted
  */
-int main(void)
+
+int _atoi(char *s)
 {
-	int c;
-	int d = 0;
+	int i;
+	int res = 0;
+	int sig = -1;
+	int brk = 0;
 
-	while (d < 10)
+	for (i = 0; s[i] != '\0'; i++)
 	{
-		c = 0;
-		while (c < 10)
+		if (s[i] == '-')
+			sig = sig * -1;
+		if (s[i] >= '0' && s[i] <= '9')
 		{
-			if (d != c && d < c)
-			{
-				putchar('0' + d);
-				putchar('0' + c);
-
-				if (c + d != 17)
-				{
-					putchar(',');
-					putchar(' ');
-				}
-			}
-
-			c++;
+			res = res * 10;
+			res -= (s[i] - '0');
+			brk = 1;
 		}
-		d++;
+		else if (brk == 1)
+			break;
 	}
-	putchar('\n');
-	return (0);
+	res = sig * res;
+	return (res);
 }
